@@ -4,24 +4,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/makeTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="91dp"
         android:layout_marginEnd="27dp"
-        android:text="NEW"
+        android:text="@string/newButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No tasks to complete!"
+        android:id="@+id/anyTasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/noTasksATM"
         android:textSize="24sp"
-        android:layout_above="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="161dp"
-        android:paddingBottom="70dp"/>
+        android:gravity="center"
+        android:paddingBottom="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

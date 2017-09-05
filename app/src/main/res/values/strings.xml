@@ -3,4 +3,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_tasks">Tasks</string>
+    <string name="nav_social">Social</string>
+    <string name="nav_settings">Settings</string>
+    <string name="make_taskname">Task Name:</string>
+    <string name="make_completiontime">Target Completion Time</string>
+    <string name="noTasksATM">No tasks to complete!</string>
+    <string name="newButton">NEW</string>
 </resources>

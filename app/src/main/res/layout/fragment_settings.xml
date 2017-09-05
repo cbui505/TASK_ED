@@ -1,94 +1,114 @@
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="fill_parent"
     android:layout_width="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/NotificationFreqText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="37dp"
         android:text="Notification Frequency"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginTop="23dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView9" />
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="14dp"
-        android:text="once" />
+        android:orientation="vertical"
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/NotificationFreqText"
+        android:layout_alignStart="@+id/NotificationFreqText">
 
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="twice"
-        android:layout_above="@+id/radioButton4"
-        android:layout_alignStart="@+id/editText" />
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="once" />
 
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="three times"
-        android:layout_alignBaseline="@+id/radioButton2"
-        android:layout_alignBottom="@+id/radioButton2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp" />
-
-    <RadioButton
-        android:id="@+id/radioButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/radioButton"
-        android:layout_below="@+id/radioButton"
-        android:layout_marginTop="22dp"
-        android:text="customize" />
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="twice" />
+        <RadioButton
+            android:id="@+id/radio3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="three times"/>
+        <RadioButton
+            android:id="@+id/radio4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="customize"/>
+    </RadioGroup>
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:id="@+id/editText2"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:layout_alignTop="@+id/radioButton4"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/textView8"
+        android:layout_toEndOf="@+id/radioGroup" />
 
-    <EditText
-        android:id="@+id/editText4"
+    <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/radioButton4"
-        android:layout_below="@+id/editText"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Notification Type" />
+        android:layout_marginTop="22dp"
+        android:text="Notification Type"
+        android:textSize="18sp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignStart="@+id/radioGroup" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Push"
+        android:layout_below="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Vibrate"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignStart="@+id/checkBox" />
 
     <CheckBox
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editText4"
-        android:layout_below="@+id/editText4"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="13dp"
-        android:text="Push" />
+        android:layout_marginTop="16dp"
+        android:text="Email"
+        android:layout_below="@+id/checkBox2"
+        android:layout_alignStart="@+id/checkBox2" />
 
-    <CheckBox
-        android:id="@+id/checkBox4"
+    <EditText
+        android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="Vibrate"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
         android:layout_below="@+id/checkBox3"
-        android:layout_alignStart="@+id/checkBox3" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/editText3"
+        android:layout_alignBottom="@+id/editText3"
+        android:layout_toStartOf="@+id/editText3"
+        android:layout_marginEnd="14dp" />
 
 </RelativeLayout>
