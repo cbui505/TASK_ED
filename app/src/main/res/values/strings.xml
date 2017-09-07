@@ -10,4 +10,8 @@
     <string name="make_completiontime">Target Completion Time</string>
     <string name="noTasksATM">No tasks to complete!</string>
     <string name="newButton">NEW</string>
+    <string name="new_task_title">New Task</string>
+    <string name="taskFrag_id">create_task</string>
+    <string name="dialog_create">Create</string>
+    <string name="dialog_cancel">Cancel</string>
 </resources>
