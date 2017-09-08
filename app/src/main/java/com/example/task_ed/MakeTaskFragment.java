@@ -52,6 +52,8 @@ public class MakeTaskFragment extends DialogFragment {
                             //otherwise, cast convert to String
                             String task = getTaskName.getText().toString();
                             String time = getCompletionTime.getText().toString();
+                            //ignore incomplete entries
+                            if(task.equals("") || time.equals("")) return;
                             Log.d("FINDME", task + " and " + time);  //debug
                             //store both inputs in an array and send array back to TaskFragment
                             String[] data = new String[2];

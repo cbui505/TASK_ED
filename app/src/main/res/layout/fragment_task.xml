@@ -14,7 +14,7 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/anyTasks"
+        android:id="@+id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/noTasksATM"
@@ -23,5 +23,13 @@
         android:paddingBottom="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:id="@+id/taskList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp" />
 
 </RelativeLayout>

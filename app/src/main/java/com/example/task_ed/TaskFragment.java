@@ -1,15 +1,15 @@
 package com.example.task_ed;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import static com.example.task_ed.MakeTaskFragment.*;
 
@@ -17,14 +17,13 @@ import static com.example.task_ed.MakeTaskFragment.*;
 public class TaskFragment extends Fragment implements MakeTaskDialogListener{
 
     //will not display the anyTasks message if we have any tasks (placeholder)
-    private static TextView anyTasks;
-    private static int taskNumber = 0;
+    private static ListView taskList;
+    private static ArrayList<String[]> listItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         //inflate fragment and set pointer to textview defined in xml
         View view = inflater.inflate(R.layout.fragment_task,container,false);
-        anyTasks = (TextView)view.findViewById(R.id.anyTasks);
 
         //get reference to button that allows user to create a new task
         Button makeTask = (Button)view.findViewById(R.id.makeTask);
@@ -36,7 +35,6 @@ public class TaskFragment extends Fragment implements MakeTaskDialogListener{
                     }
                 }
         );
-
 
         return view;
     }
@@ -57,7 +55,20 @@ public class TaskFragment extends Fragment implements MakeTaskDialogListener{
     /* Take in user input from MakeTaskFragment. */
     public void onFinishTaskDialog(String[] inputText) {
         //will need to implement means to store the task next
+
         if(inputText[0].equals("") || inputText[1].equals("")) return;
-        anyTasks.setText(inputText[0] + " - do by " + inputText[1]);
+
+        //add the user input to the arraylist
+        listItems.add(inputText);
+        //create listadapter
+        ListAdapter adapter = new ListAdapter(getActivity(), listItems);
+        //get the listview we will be adding to
+        taskList = (ListView)getView().findViewById(R.id.taskList);
+        //get message when list is empty
+        TextView empty = (TextView)getView().findViewById(R.id.empty);
+        //set message if list is empty
+        taskList.setEmptyView(empty);
+        //use adapter to display list
+        taskList.setAdapter(adapter);
     }
 }
