@@ -55,7 +55,7 @@ public class DBTaskManager extends SQLiteOpenHelper{
     }
 
     //add all tasks stored in database to the input arraylist
-    public ArrayList getTasks(){
+    public ArrayList<String[]> getTasks(){
         SQLiteDatabase db = getReadableDatabase();
         //allocate space for arraylist
         ArrayList<String[]> tempArray = new ArrayList<>();

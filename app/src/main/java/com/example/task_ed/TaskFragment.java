@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import static com.example.task_ed.MakeTaskFragment.*;
 
-
+/* fragment that displays the list of tasks, and allows users to add or delete tasks */
 public class TaskFragment extends Fragment implements MakeTaskDialogListener{
 
     //will not display the anyTasks message if we have any tasks (placeholder)
@@ -30,6 +31,19 @@ public class TaskFragment extends Fragment implements MakeTaskDialogListener{
         //set up database
         taskManager = new DBTaskManager(getActivity(), null, null, 1);
         listItems = taskManager.getTasks();
+
+        //display information stored in db when user switches to task tab
+        if(!listItems.isEmpty()) {
+            ListAdapter adapter = new ListAdapter(getActivity(), listItems);
+            //get the listview we will be adding to
+            taskList = (ListView) view.findViewById(R.id.taskList);
+
+            //set message if list is empty
+            TextView empty = (TextView)view.findViewById(R.id.empty);
+            taskList.setEmptyView(empty);
+
+            taskList.setAdapter(adapter);
+        }
 
         //get reference to button that allows user to create a new task
         Button makeTask = (Button)view.findViewById(R.id.makeTask);
@@ -79,4 +93,5 @@ public class TaskFragment extends Fragment implements MakeTaskDialogListener{
         //use adapter to display list
         taskList.setAdapter(adapter);
     }
+
 }

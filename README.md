@@ -6,12 +6,11 @@ An android mobile application where the user can add, customize, and set reminde
 
 To-Do List
 
--Implement deletion of individual tasks at press of button
--Save the state of a fragment (what is displayed) as user switches to different tab
--Add notifications at the specified task time
--UI improvements
--Settings page
--Social
-
+-Implement deletion of individual tasks at press of button 
+-Save the state of a fragment (what is displayed) as user switches to different tab 
+-Add notifications at the specified task time 
+-UI improvements 
+-Settings page 
+-Social 
 -
 -

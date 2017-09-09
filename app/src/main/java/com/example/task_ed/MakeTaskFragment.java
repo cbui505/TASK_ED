@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+
+/*fragment responsible for dialog involving creation of new task*/
 public class MakeTaskFragment extends DialogFragment {
 
     //for creating new instances of this fragment
