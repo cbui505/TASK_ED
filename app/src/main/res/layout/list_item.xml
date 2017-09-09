@@ -22,8 +22,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingBottom="20dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:paddingBottom="20dp"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="0dp"
+        android:onClick="button2"
+        android:paddingBottom="8dp"
+        android:text="Delete this Task"
+        android:textAlignment="center"
         android:textSize="14sp" />
 </LinearLayout>
