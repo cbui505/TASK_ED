@@ -31,8 +31,8 @@ public class ListAdapter extends ArrayAdapter<String[]> {
         //get reference to next listitem (listitem is an array that holds task and time
         String[] row = getItem(position);
         //get references to textviews that will be written to
-        TextView listItemTask = (TextView)view.findViewById(R.id.listItemTask);
-        TextView listItemTime = (TextView)view.findViewById(R.id.listItemTime);
+        TextView listItemTask = (TextView) view.findViewById(R.id.listItemTask);
+        TextView listItemTime = (TextView) view.findViewById(R.id.listItemTime);
 
         //set what is displayed for each list item
         listItemTask.setText(row[0]);
@@ -43,7 +43,8 @@ public class ListAdapter extends ArrayAdapter<String[]> {
         final String timeString = row[1];
 
         //get reference to delete button of listitems and set up onClick
-        ImageButton deleteButton = (ImageButton)view.findViewById(R.id.deleteButton);
+
+        ImageButton deleteButton = (ImageButton) view.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
