@@ -9,6 +9,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.Toast;
+import android.content.Context;
+import android.database.Cursor;
+import android.media.Image;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 /*fragment responsible for dialog involving creation of new task*/
@@ -21,7 +36,7 @@ public class MakeTaskFragment extends DialogFragment {
     }
 
     //add interface to send data back to TaskFragment
-    public interface MakeTaskDialogListener {
+    public interface MakeTaskDialogListener{
         void onFinishTaskDialog(String[] inputText);
     }
 
@@ -48,21 +63,27 @@ public class MakeTaskFragment extends DialogFragment {
                         EditText getTaskName = (EditText)dialogView.findViewById(R.id.getTaskName);
                         EditText getCompletionTime = (EditText)dialogView.findViewById(R.id.getCompletionTime);
                         //do nothing if they didnt fill in all fields
-                        if(getTaskName==null || getCompletionTime==null){
+                        ListView taskList= (ListView)getView().findViewById(R.id.taskList);
+
+                        if(getTaskName==null || getCompletionTime==null ){
                                 Log.d("FINDME","null"); //debug
-                        }else{
+                        }else {
                             //otherwise, cast convert to String
                             String task = getTaskName.getText().toString();
                             String time = getCompletionTime.getText().toString();
+
                             //ignore incomplete entries
-                            if(task.equals("") || time.equals("")) return;
-                            Log.d("FINDME", task + " and " + time);  //debug
-                            //store both inputs in an array and send array back to TaskFragment
-                            String[] data = new String[2];
-                            data[0]=task;
-                            data[1]=time;
-                            listener = (MakeTaskDialogListener) getTargetFragment();
-                            listener.onFinishTaskDialog(data);
+                            if (task.equals("") || time.equals("")||task.equals(null) || time.equals(null)) {
+                                return;
+                            } else {
+                                Log.d("FINDME", task + " and " + time);  //debug
+                                //store both inputs in an array and send array back to TaskFragment
+                                String[] data = new String[2];
+                                data[0] = task;
+                                data[1] = time;
+                                listener = (MakeTaskDialogListener) getTargetFragment();
+                                listener.onFinishTaskDialog(data);
+                            }
                         }
 
                     }
