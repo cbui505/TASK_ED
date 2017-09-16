@@ -1,6 +1,9 @@
 package com.example.task_ed;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -52,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         switch(position){
             case 0:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, taskFrag).commit();
-
                 break;
             case 1:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, socialFrag).commit();
@@ -63,5 +65,4 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         }
         return true;
     }
-
 }

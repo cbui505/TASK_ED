@@ -1,7 +1,16 @@
 package com.example.task_ed;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,8 +102,37 @@ public class TaskFragment extends Fragment implements MakeTaskDialogListener {
         //use adapter to display list
 
         taskList.setAdapter(adapter);
-
+        int count = taskList.getAdapter().getCount();
+        makeNotification(inputText[0], inputText[1], count);
 
     }
 
+    public void makeNotification(String task, String time, int number) {
+        //create the notification
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getActivity())
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("TASK-ED Reminder")
+                        .setContentText(task + " - Complete by " + time);
+
+        //set up intent and other necessary data
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        PendingIntent activity = PendingIntent.getActivity(getActivity(), 001, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        mBuilder.setContentIntent(activity);
+
+        //get reference to created notification
+        Notification notification = mBuilder.build();
+
+        Intent notificationIntent = new Intent(getActivity(), NotificationReceiver.class);
+        notificationIntent.putExtra(NotificationReceiver.NOTIFICATION_ID, 001);
+        notificationIntent.putExtra(NotificationReceiver.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 001, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        //set when to display notification
+        //set delay as 1 minute. replace 1 with another value to change minute delay
+        long futureInMillis = SystemClock.elapsedRealtime() + (1000 * 60 * 1);
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+
+    }
 }
