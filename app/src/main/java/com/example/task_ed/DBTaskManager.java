@@ -28,6 +28,7 @@ public class DBTaskManager extends SQLiteOpenHelper{
                 " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_TASK_NAME + " TEXT, " + COLUMN_TASK_TIME + " TEXT);";
         db.execSQL(sqlCommand);
+        db.close();
     }
 
     @Override

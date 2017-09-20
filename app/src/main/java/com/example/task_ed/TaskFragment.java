@@ -2,11 +2,9 @@ package com.example.task_ed;
 
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
@@ -16,11 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ListView;
-import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.example.task_ed.MakeTaskFragment.*;
 
@@ -109,11 +106,15 @@ public class TaskFragment extends Fragment implements MakeTaskDialogListener {
 
     public void makeNotification(String task, String time, int number) {
         //create the notification
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getActivity())
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("TASK-ED Reminder")
                         .setContentText(task + " - Complete by " + time);
+        mBuilder.setVibrate(new long[] { 1000, 500});
+        //set notification led color, light duration, and interval between flash
+        mBuilder.setLights(0x0000FF, 300, 2000);
 
         //set up intent and other necessary data
         Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -129,10 +130,41 @@ public class TaskFragment extends Fragment implements MakeTaskDialogListener {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 001, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         //set when to display notification
-        //set delay as 1 minute. replace 1 with another value to change minute delay
-        long futureInMillis = SystemClock.elapsedRealtime() + (1000 * 60 * 1);
+
+        int hour, minute = 0;
+        //get hours and minutes by splitting up string
+        try{
+            String[] timeHM = time.split(":");
+            hour = Integer.parseInt(timeHM[0].trim());
+            minute = Integer.parseInt(timeHM[1].trim());
+        }catch(ArrayIndexOutOfBoundsException e){
+            hour = Integer.parseInt(time);
+            minute = 0;
+        }
+
+        //filter input to work on clock
+        if(hour >=24){
+            int factor = hour/24;
+            hour -= factor*24;
+        }
+        Calendar calNow = Calendar.getInstance();
+        Calendar calSet = (Calendar) calNow.clone();
+
+        //set time to be something am/pm
+        if(hour <=12 && hour !=0) calSet.set(Calendar.HOUR, hour);
+        //set time on 24h scale
+        else                      calSet.set(Calendar.HOUR_OF_DAY, hour);
+        calSet.set(Calendar.MINUTE, minute);
+        calSet.set(Calendar.SECOND, 0);
+        calSet.set(Calendar.MILLISECOND, 0);
+
+        if(calSet.compareTo(calNow) <= 0){
+            //Today Set time passed, count to tomorrow
+            calSet.add(Calendar.HOUR, 12);
+        }
+
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calSet.getTimeInMillis(), pendingIntent);
 
     }
 }
