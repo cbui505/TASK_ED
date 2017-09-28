@@ -28,7 +28,6 @@ public class DBTaskManager extends SQLiteOpenHelper{
                 " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_TASK_NAME + " TEXT, " + COLUMN_TASK_TIME + " TEXT);";
         db.execSQL(sqlCommand);
-        db.close();
     }
 
     @Override
@@ -36,7 +35,6 @@ public class DBTaskManager extends SQLiteOpenHelper{
         //if upgrading database, simply delete the old db and create the new one
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TITLE);
         onCreate(db);
-        db.close();
     }
 
     public void addTask(taskItems task){
@@ -47,21 +45,13 @@ public class DBTaskManager extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         //insert new row with given data
         db.insert(TABLE_TITLE, null, values);
-        db.close();
     }
 
-    //delete a task from the db. Might also help to overload method to accept task_name as well
-    public void deleteTask(taskItems task){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_TITLE + " WHERE " + COLUMN_ID + "=" + task.get__id() + ";");
-        db.close();
-    }
 
     public void deleteTask(String task_name, String task_time){
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_TITLE, COLUMN_TASK_NAME + " = " + "'" + task_name +"' " +
                 " AND " + COLUMN_TASK_TIME + " = " + "'" + task_time +"'", null);
-        db.close();
     }
 
     //add all tasks stored in database to the input arraylist
